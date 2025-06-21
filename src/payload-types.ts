@@ -810,6 +810,16 @@ export interface Homepage {
     } | null;
     media?: (number | null) | Media;
   };
+  careerJourney?:
+    | {
+        title: string;
+        company: string;
+        period: string;
+        location?: string | null;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1437,6 +1447,16 @@ export interface HomepageSelect<T extends boolean = true> {
         homePageHeroMedia?: T;
         richText?: T;
         media?: T;
+      };
+  careerJourney?:
+    | T
+    | {
+        title?: T;
+        company?: T;
+        period?: T;
+        location?: T;
+        description?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
