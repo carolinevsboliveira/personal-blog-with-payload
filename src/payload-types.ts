@@ -820,6 +820,21 @@ export interface Homepage {
         id?: string | null;
       }[]
     | null;
+  projects?:
+    | {
+        title: string;
+        description: string;
+        tech?:
+          | {
+              name: string;
+              id?: string | null;
+            }[]
+          | null;
+        github?: string | null;
+        live?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1456,6 +1471,21 @@ export interface HomepageSelect<T extends boolean = true> {
         period?: T;
         location?: T;
         description?: T;
+        id?: T;
+      };
+  projects?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        tech?:
+          | T
+          | {
+              name?: T;
+              id?: T;
+            };
+        github?: T;
+        live?: T;
         id?: T;
       };
   updatedAt?: T;

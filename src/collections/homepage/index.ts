@@ -39,6 +39,45 @@ const Homepage: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'projects',
+      type: 'array',
+      label: 'Projects',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          required: true,
+        },
+        {
+          name: 'tech',
+          type: 'array',
+          label: 'Technologies',
+          fields: [
+            {
+              name: 'name',
+              type: 'text',
+              required: true,
+            },
+          ],
+        },
+        {
+          name: 'github',
+          type: 'text',
+          label: 'GitHub Link',
+        },
+        {
+          name: 'live',
+          type: 'text',
+          label: 'Live Link',
+        },
+      ],
+    },
   ],
 };
 
