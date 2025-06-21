@@ -47,7 +47,7 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
                 ],
                 direction: 'ltr',
                 fields: {
-                  linkType: 'custom',
+                  type: 'custom',
                   newTab: false,
                   url: '/admin',
                 },

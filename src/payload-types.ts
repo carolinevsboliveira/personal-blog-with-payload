@@ -153,23 +153,15 @@ export interface Page {
   id: number;
   title: string;
   hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    links?:
+    type: 'none' | 'homePageHero' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    mainTitle?: string | null;
+    secondaryTitles?:
+      | {
+          title?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    actionButtons?:
       | {
           link: {
             type?: ('reference' | 'custom') | null;
@@ -193,6 +185,28 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
+    optionalText?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    homePageHeroMedia?: (number | null) | Media;
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
     media?: (number | null) | Media;
   };
   layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
@@ -740,10 +754,61 @@ export interface Form {
 export interface Homepage {
   id: number;
   hero: {
-    bgImage?: string | null;
-    title: string;
-    subtitle?: string | null;
-    actionsButton?: (number | Button)[] | null;
+    type: 'none' | 'homePageHero' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    mainTitle?: string | null;
+    secondaryTitles?:
+      | {
+          title?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    actionButtons?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    optionalText?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    homePageHeroMedia?: (number | null) | Media;
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    media?: (number | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -1033,8 +1098,14 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         type?: T;
-        richText?: T;
-        links?:
+        mainTitle?: T;
+        secondaryTitles?:
+          | T
+          | {
+              title?: T;
+              id?: T;
+            };
+        actionButtons?:
           | T
           | {
               link?:
@@ -1049,6 +1120,14 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               id?: T;
             };
+        optionalText?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        homePageHeroMedia?: T;
+        richText?: T;
         media?: T;
       };
   layout?:
@@ -1326,10 +1405,38 @@ export interface HomepageSelect<T extends boolean = true> {
   hero?:
     | T
     | {
-        bgImage?: T;
-        title?: T;
-        subtitle?: T;
-        actionsButton?: T;
+        type?: T;
+        mainTitle?: T;
+        secondaryTitles?:
+          | T
+          | {
+              title?: T;
+              id?: T;
+            };
+        actionButtons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        optionalText?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        homePageHeroMedia?: T;
+        richText?: T;
+        media?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1606,6 +1713,8 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: number;
+  logo?: (number | null) | Media;
+  name?: string | null;
   navItems?:
     | {
         link: {
@@ -1663,6 +1772,8 @@ export interface Footer {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  name?: T;
   navItems?:
     | T
     | {
