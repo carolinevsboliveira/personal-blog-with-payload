@@ -7,6 +7,7 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
+import { Text } from '@/components/ui/text'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -32,7 +33,7 @@ export default async function Page() {
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <Text variant="heading-h1">Posts</Text>
         </div>
       </div>
 

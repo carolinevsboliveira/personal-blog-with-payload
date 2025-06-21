@@ -21,7 +21,7 @@ const CardTitle: React.FC<
   { ref?: React.Ref<HTMLHeadingElement> } & React.HTMLAttributes<HTMLHeadingElement>
 > = ({ className, ref, ...props }) => (
   <h3
-    className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
+    className={cn('text-2xl font-semibold leading-none tracking-tight text-primary', className)}
     ref={ref}
     {...props}
   />

@@ -8,6 +8,7 @@ import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
 import { notFound } from 'next/navigation'
+import { Text } from '@/components/ui/text'
 
 export const revalidate = 600
 
@@ -38,7 +39,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <Text variant="heading-h1">Posts</Text>
         </div>
       </div>
 

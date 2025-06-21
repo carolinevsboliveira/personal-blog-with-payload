@@ -1814,6 +1814,14 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  shortText?: string | null;
+  socialLinks?:
+    | {
+        network: 'github' | 'linkedin' | 'email';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1859,6 +1867,14 @@ export interface FooterSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        id?: T;
+      };
+  shortText?: T;
+  socialLinks?:
+    | T
+    | {
+        network?: T;
+        url?: T;
         id?: T;
       };
   updatedAt?: T;
