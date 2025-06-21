@@ -27,12 +27,12 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
               <CardTitle className="flex items-center justify-between">
                 {project.title}
                 <div className="flex gap-2">
-                  <Button variant="ghost" size="sm" asChild>
+                  <Button variant="outline" size="sm" asChild>
                     <a href={project.github ?? ''} target="_blank" rel="noopener noreferrer">
                       <Github className="w-4 h-4" />
                     </a>
                   </Button>
-                  <Button variant="ghost" size="sm" asChild>
+                  <Button variant="outline" size="sm" asChild>
                     <a href={project.live ?? ''} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="w-4 h-4" />
                     </a>

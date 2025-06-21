@@ -11,6 +11,7 @@ import { usePathname } from 'next/navigation'
 import { useAuth } from '@payloadcms/ui'
 import { Logo } from '@/components/Logo/Logo'
 import Link from 'next/link'
+import { ThemeToggle } from '@/components/ThemeToogle'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const { user } = useAuth()
@@ -62,6 +63,7 @@ console.log(data)
               return <CMSLink key={i} {...link} appearance="link" />
             })}
             <Link href="#footer" className="flex items-center">Test Link</Link>
+            <ThemeToggle />
           </div>
         </div>
       </div>
