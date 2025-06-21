@@ -20,7 +20,7 @@ const textVariants = cva('', {
   },
 })
 
-type TextElement = React.ElementRef<'p'>
+type TextElement = React.ComponentRef<'p'>
 type TextProps = React.ComponentPropsWithoutRef<'p'> &
   VariantProps<typeof textVariants> & {
     as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span' | 'div'

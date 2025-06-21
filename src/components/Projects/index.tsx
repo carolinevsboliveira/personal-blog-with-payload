@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Github } from 'lucide-react'
 import { ExternalLink } from 'lucide-react'
-
+import { Text } from '@/components/ui/text'
 interface ProjectsProps {
   projects: Homepage['projects']
 }
@@ -19,7 +19,7 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   return (
     <section className="py-20" id="projects">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16">Featured Projects</h2>
+      <Text variant="heading-h2" color="primary" className="text-center mb-16">Featured Projects</Text>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <Card key={index} className="group hover:shadow-lg transition-shadow">

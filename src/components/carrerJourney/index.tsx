@@ -1,14 +1,14 @@
 import { MapPin, Calendar } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Homepage } from '@/payload-types'
-
+import { Text } from '../ui/text'
 export const CareerJourney = ({ career }: { career: Homepage['careerJourney'] }) => {
   if (!career || career.length < 1) return null
 
   return (
     <section className="py-20 bg-muted/50" id="career-journey">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16">Career Journey</h2>
+        <Text variant="heading-h2" color="primary" className="text-center mb-16">Career Journey</Text>
         <div className="max-w-4xl mx-auto">
           {career?.map((job, index) => (
             <div key={index} className="relative pl-8 pb-12 last:pb-0">
