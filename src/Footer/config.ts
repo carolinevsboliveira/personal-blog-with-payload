@@ -25,6 +25,29 @@ export const Footer: GlobalConfig = {
         },
       },
     },
+    {
+      name: 'shortText',
+      type: 'text',
+      label: 'Short Text',
+    },
+    {
+      name: 'socialLinks',
+      type: 'array',
+      label: 'Social Links',
+      fields: [
+        {
+          name: 'network',
+          type: 'select',
+          options: ['github', 'linkedin', 'email'],
+          required: true,
+        },
+        {
+          name: 'url',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
   ],
   hooks: {
     afterChange: [revalidateFooter],

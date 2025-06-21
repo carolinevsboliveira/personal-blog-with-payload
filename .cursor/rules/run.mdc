@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+**Always** Uses pnpm to run comands envolving node scripts

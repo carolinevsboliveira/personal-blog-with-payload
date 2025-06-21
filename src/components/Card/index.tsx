@@ -3,6 +3,7 @@ import { cn } from '@/utilities/ui'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import React, { Fragment } from 'react'
+import { Text } from '@/components/ui/text'
 
 import type { Post } from '@/payload-types'
 
@@ -68,15 +69,11 @@ export const Card: React.FC<{
             )}
           </div>
         )}
-        {titleToUse && (
-          <div className="prose">
-            <h3>
-              <Link className="not-prose" href={href} ref={link.ref}>
-                {titleToUse}
-              </Link>
-            </h3>
-          </div>
-        )}
+        <Text variant="heading-h3" as="h3">
+          <Link className="not-prose" href={href} ref={link.ref}>
+            {titleToUse}
+          </Link>
+        </Text>
         {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
       </div>
     </article>

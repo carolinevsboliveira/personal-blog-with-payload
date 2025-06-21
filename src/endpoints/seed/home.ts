@@ -75,7 +75,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                   ],
                   direction: 'ltr',
                   fields: {
-                    linkType: 'custom',
+                    type: 'custom',
                     newTab: false,
                     url: '/admin',
                   },
@@ -107,7 +107,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                   ],
                   direction: 'ltr',
                   fields: {
-                    linkType: 'custom',
+                    type: 'custom',
                     newTab: true,
                     url: 'https://github.com/payloadcms/payload/tree/main/templates/website',
                   },
@@ -229,7 +229,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                         ],
                         direction: 'ltr',
                         fields: {
-                          linkType: 'custom',
+                          type: 'custom',
                           newTab: false,
                           url: '/admin',
                         },
@@ -420,7 +420,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                         ],
                         direction: 'ltr',
                         fields: {
-                          linkType: 'custom',
+                          type: 'custom',
                           newTab: false,
                           url: '/admin',
                         },
@@ -632,7 +632,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                     ],
                     direction: 'ltr',
                     fields: {
-                      linkType: 'custom',
+                      type: 'custom',
                       newTab: false,
                       url: '/admin',
                     },

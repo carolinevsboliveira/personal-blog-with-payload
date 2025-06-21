@@ -4,6 +4,7 @@ import config from '@payload-config'
 import '@payloadcms/next/css'
 import type { ServerFunctionClient } from 'payload'
 import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
+import { UploadHandlersProvider } from '@payloadcms/ui/providers/UploadHandlers'
 import React from 'react'
 
 import { importMap } from './admin/importMap.js'
@@ -23,9 +24,11 @@ const serverFunction: ServerFunctionClient = async function (args) {
 }
 
 const Layout = ({ children }: Args) => (
+  <UploadHandlersProvider>
   <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
     {children}
   </RootLayout>
+  </UploadHandlersProvider>
 )
 
 export default Layout

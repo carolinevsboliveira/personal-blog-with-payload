@@ -1,8 +1,18 @@
-import type { Theme } from './types'
 
-export const themeLocalStorageKey = 'payload-theme'
+export const themeLocalStorageKey = 'selected_theme_charlie_romeu'
 
 export const defaultTheme = 'light'
+
+export type Theme = 'dark' | 'light'
+
+export interface ThemeContextType {
+  setTheme: (theme: Theme | null) => void
+  theme?: Theme | null
+}
+
+export function themeIsValid(string: null | string): string is Theme {
+  return string ? ['dark', 'light'].includes(string) : false
+}
 
 export const getImplicitPreference = (): Theme | null => {
   const mediaQuery = '(prefers-color-scheme: dark)'
