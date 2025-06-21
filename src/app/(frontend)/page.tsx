@@ -15,7 +15,6 @@ export default async function Homepage() {
   return (
     <div>
       {heroData && <RenderHero {...heroData} />}
-      <pre>{JSON.stringify(homepage, null, 2)}</pre>
     </div>
   )
 }

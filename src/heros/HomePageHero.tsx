@@ -11,9 +11,32 @@ export const HomePageHero: React.FC<Page['hero']> = ({
   secondaryTitles,
   actionButtons,
   optionalText,
+  homePageHeroMedia,
 }) => {
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [typedText, setTypedText] = useState("")
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  useEffect(() => {
+    const currentText = secondaryTitles?.[currentTextIndex]?.title
+    let charIndex = 0
+    setTypedText("")
+
+    const typeInterval = setInterval(() => {
+      if (charIndex < (currentText?.length ?? 0)) {
+        setTypedText(currentText?.slice(0, charIndex + 1) ?? "")
+        charIndex++
+      } else {
+        clearInterval(typeInterval)
+        setTimeout(() => {
+          setCurrentTextIndex((prev) => (prev + 1) % (secondaryTitles?.length ?? 0))
+        }, 2000)
+      }
+    }, 100)
+
+    return () => clearInterval(typeInterval)
+  }, [currentTextIndex])
+
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -26,97 +49,28 @@ export const HomePageHero: React.FC<Page['hero']> = ({
   
   return (
     <section
-    className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-purple-900/20 via-background to-purple-800/10"
+    className="min-h-screen flex items-center justify-center relative overflow-hidden"
   >
-    {/* Animated Background Symbols */}
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(30)].map((_, i) => {
-        const baseX = Math.random() * 100
-        const baseY = Math.random() * 100
-        const symbol = ["<", ">", "/", "{", "}", "(", ")", "[", "]", "</>"][Math.floor(Math.random() * 10)]
-        const size = Math.random() * 3 + 1
 
-        return (
-          <div
-            key={i}
-            className="absolute font-mono font-bold transition-all duration-1000 ease-out"
-            style={{
-              left: `${baseX}%`,
-              top: `${baseY}%`,
-              fontSize: `${size}rem`,
-              color: `hsl(${270 + Math.random() * 60}, ${60 + Math.random() * 40}%, ${30 + Math.random() * 40}%)`,
-              transform: `translate(${(mousePosition.x - window.innerWidth / 2) * (0.02 + i * 0.001)}px, ${(mousePosition.y - window.innerHeight / 2) * (0.02 + i * 0.001)}px) rotate(${Math.sin(Date.now() * 0.001 + i) * 10}deg)`,
-              opacity: 0.1 + Math.sin(Date.now() * 0.002 + i) * 0.1,
-              animationDelay: `${Math.random() * 3}s`,
-            }}
-          >
-            {symbol}
-          </div>
-        )
-      })}
-
-      {/* Floating particles */}
-      {[...Array(15)].map((_, i) => (
-        <div
-          key={`particle-${i}`}
-          className="absolute w-1 h-1 bg-purple-500 rounded-full opacity-30 animate-pulse"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            transform: `translate(${(mousePosition.x - window.innerWidth / 2) * (0.05 + i * 0.002)}px, ${(mousePosition.y - window.innerHeight / 2) * (0.05 + i * 0.002)}px)`,
-            animationDelay: `${Math.random() * 2}s`,
-            animationDuration: `${2 + Math.random() * 3}s`,
-          }}
-        />
-      ))}
-
-      {/* Large background symbols */}
-      {[...Array(8)].map((_, i) => (
-        <div
-          key={`large-${i}`}
-          className="absolute font-mono font-bold text-purple-500/5 select-none"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            fontSize: `${8 + Math.random() * 12}rem`,
-            transform: `translate(${(mousePosition.x - window.innerWidth / 2) * (0.01 + i * 0.0005)}px, ${(mousePosition.y - window.innerHeight / 2) * (0.01 + i * 0.0005)}px) rotate(${Math.sin(Date.now() * 0.0005 + i) * 5}deg)`,
-            zIndex: 1,
-          }}
-        >
-          {["</>", "{}", "[]", "()"][Math.floor(Math.random() * 4)]}
-        </div>
-      ))}
-    </div>
-
-    {/* Purple glow effects */}
     <div className="absolute inset-0 pointer-events-none">
       <div
-        className="absolute w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"
-        style={{
-          left: `${mousePosition.x - 192}px`,
-          top: `${mousePosition.y - 192}px`,
-          transition: "all 0.3s ease-out",
-        }}
-      />
-      <div
-        className="absolute w-64 h-64 bg-purple-400/5 rounded-full blur-2xl"
+        className="absolute w-64 h-64 bg-purple-500/20 rounded-full blur-2xl all 0.5s ease-out"
         style={{
           left: `${mousePosition.x - 128}px`,
           top: `${mousePosition.y - 128}px`,
-          transition: "all 0.5s ease-out",
         }}
       />
     </div>
 
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 relative">
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6">
-        Hi, I'm{" "}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">
-          John Doe
+      
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-100 to-purple-600">
+          {mainTitle}
         </span>
       </h1>
       <div className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground mb-8 h-12">
-        {/* <span className="font-mono text-purple-300">{typedText}</span> */}
+       { typedText && <span className="font-mono text-purple-300">{typedText}</span>}
         <span className="animate-pulse text-purple-400">|</span>
       </div>
       <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-12 text-muted-foreground">
