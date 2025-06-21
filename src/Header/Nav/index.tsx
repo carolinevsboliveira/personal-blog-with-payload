@@ -62,7 +62,6 @@ console.log(data)
             {navItems.map(({ link }, i) => {
               return <CMSLink key={i} {...link} appearance="link" />
             })}
-            <Link href="#footer" className="flex items-center">Test Link</Link>
             <ThemeToggle />
           </div>
         </div>
