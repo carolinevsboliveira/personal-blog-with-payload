@@ -131,4 +131,5 @@ export const hero: Field = {
     },
   ],
   label: false,
+  localized: true,
 }
