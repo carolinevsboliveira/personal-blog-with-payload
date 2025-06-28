@@ -10,7 +10,7 @@ export default async function Homepage({ params }: { params: Promise<{ lang: 'pt
   console.log("🚀 ~ Homepage ~ lang:", lang)
 
   const payload = await getPayload({ config: configPromise })
-7
+
 
   const [homepage, posts] = await Promise.all([
     payload.find({

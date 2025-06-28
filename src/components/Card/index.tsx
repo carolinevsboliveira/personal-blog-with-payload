@@ -8,6 +8,7 @@ import { Text } from '@/components/ui/text'
 import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
+import { useParams } from 'next/navigation'
 
 export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
 
@@ -21,14 +22,14 @@ export const Card: React.FC<{
 }> = (props) => {
   const { card, link } = useClickableCard({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
-
+  const { lang } = useParams()
   const { slug, categories, meta, title } = doc || {}
   const { description, image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
-  const href = `/${relationTo}/${slug}`
+  const href = `/${lang}/${relationTo}/${slug}`
 
   return (
     <article

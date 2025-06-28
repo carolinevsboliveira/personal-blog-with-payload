@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Post } from '@/payload-types'
 import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card'
-import { Params } from '@/types/promises'
+import { Params } from "@/types/promises"
 
 // Helper function to truncate rich text content
 const truncateRichText = (content: any, wordLimit: number) => {

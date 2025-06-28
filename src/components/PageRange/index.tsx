@@ -1,3 +1,5 @@
+import { Language } from '@/types/languages'
+import { useParams } from 'next/navigation'
 import React from 'react'
 
 const defaultLabels = {
@@ -11,7 +13,20 @@ const defaultCollectionLabels = {
     singular: 'Post',
   },
 }
-
+const getTexts = (lang: Language) => {
+  const translateText = {
+    'pt-BR': {
+      of: 'de',
+      showing: 'Mostrando',
+    },
+    en: {
+      of: 'of',
+      showing: 'Showing',
+    },
+  }
+  if(lang === 'pt-BR') return translateText['pt-BR']
+  return translateText['en']
+}
 export const PageRange: React.FC<{
   className?: string
   collection?: keyof typeof defaultCollectionLabels
@@ -22,6 +37,7 @@ export const PageRange: React.FC<{
   currentPage?: number
   limit?: number
   totalDocs?: number
+  lang?: Language
 }> = (props) => {
   const {
     className,
@@ -30,6 +46,7 @@ export const PageRange: React.FC<{
     currentPage,
     limit,
     totalDocs,
+    lang,
   } = props
 
   let indexStart = (currentPage ? currentPage - 1 : 1) * (limit || 1) + 1
@@ -43,13 +60,15 @@ export const PageRange: React.FC<{
     (collection ? defaultCollectionLabels[collection] : undefined) ||
     defaultLabels ||
     {}
+  const { of, showing } = getTexts(lang as Language)
+
 
   return (
     <div className={[className, 'font-semibold'].filter(Boolean).join(' ')}>
       {(typeof totalDocs === 'undefined' || totalDocs === 0) && 'Search produced no results.'}
       {typeof totalDocs !== 'undefined' &&
         totalDocs > 0 &&
-        `Showing ${indexStart}${indexStart > 0 ? ` - ${indexEnd}` : ''} of ${totalDocs} ${
+        `${showing} ${indexStart}${indexStart > 0 ? ` - ${indexEnd}` : ''} ${of} ${totalDocs} ${
           totalDocs > 1 ? plural : singular
         }`}
     </div>
