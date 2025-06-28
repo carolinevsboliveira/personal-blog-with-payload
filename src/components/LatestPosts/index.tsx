@@ -3,6 +3,7 @@ import React from 'react'
 
 import { Post } from '@/payload-types'
 import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card'
+import { Params } from '@/types/promises'
 
 // Helper function to truncate rich text content
 const truncateRichText = (content: any, wordLimit: number) => {
@@ -41,8 +42,9 @@ const truncateRichText = (content: any, wordLimit: number) => {
   return truncatedText.trim() + (wordCount >= wordLimit ? '...' : '')
 }
 
-export const LatestPosts = ({ posts }: { posts: Post[] }) => {
-  return (
+export const LatestPosts = async ({ posts, params }: { posts: Post[], params: Params }) => {
+  const { lang } = await params
+    return (
     <section className="bg-background py-12 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
         <div className="mb-8 text-center">
@@ -56,7 +58,7 @@ export const LatestPosts = ({ posts }: { posts: Post[] }) => {
             const { slug, title, content } = post
             const truncatedContent = truncateRichText(content, 20)
             return (
-              <Link href={`/posts/${slug}`} key={slug}>
+              <Link href={`/${lang}/posts/${slug}`} key={slug}>
                 <Card className="flex h-full lg:max-w-[800px] transform-gpu flex-col overflow-hidden rounded-lg border shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                   <CardHeader>
                     <CardTitle>{title}</CardTitle>
